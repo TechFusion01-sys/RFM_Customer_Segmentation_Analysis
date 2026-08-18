@@ -30,11 +30,8 @@ Customers with zero or negative net spend (~1.8% of the base) were excluded from
 
 3. Clustering (Python / scikit-learn) Standardized the three RFM features (StandardScaler) so no single metric dominates purely due to its numeric scale, then used the Elbow Method to select K=4 rather than guessing a cluster count. Fit a KMeans model, profiled each resulting cluster by its average R/F/M values, and mapped the four clusters to business-readable segment names:
 
-Segment	     Customers	Avg. Recency	Avg. Frequency	Avg. Monetary
-Core Customers	3,837 (66%)	65 days	8.7 orders	$2,825
-At Risk / Lost	1,954 (33%)	460 days	2.6 orders	$699
-Wholesale - High Value	42 (<1%)	20 days	121 orders	$67,850
-Wholesale - Extreme	4 (<1%)	3 days	257 orders	$422,093
+<img width="858" height="515" alt="image" src="https://github.com/user-attachments/assets/306df725-58b6-4249-8398-bdc7e7f9286f" />
+
 
 4. Visualization (Power BI) Connected directly to the MySQL schema and built an interactive dashboard with segment-level KPIs, a Recency-vs-Monetary scatter plot (to visually confirm the clusters are genuinely distinct, not arbitrary), and a validated monthly purchase-activity trend.
 
@@ -45,38 +42,16 @@ Elbow method — selecting K=4:
 <img width="594" height="500" alt="image" src="https://github.com/user-attachments/assets/e593bd50-e198-492a-9ec0-43ef02d0c272" />
 
 
-Cluster profile — average Recency, Monetary, and Frequency per cluster:
+<img width="809" height="323" alt="image" src="https://github.com/user-attachments/assets/427162e5-5839-46f7-b3a2-8bab174f637c" />
 
-cluster   Recency_Days   Monetary       Frequency
-0         65.17          2824.93        8.72
-1         19.60          67850.19       120.60
-2         2.75           422092.63      257.25
-3         459.78         698.61         2.61
 
-Cluster sizes:
+<img width="769" height="293" alt="image" src="https://github.com/user-attachments/assets/b67ecc56-19c3-43d3-a3d7-a16c4c45b2ea" />
 
-cluster   count
-0         3837
-3         1954
-1         42
-2         4
 
-Final segment counts, after mapping clusters to business-readable names:
+<img width="776" height="318" alt="image" src="https://github.com/user-attachments/assets/c7418139-3853-4b70-a952-1fce2425a7f0" />
 
-Segment                     count
-Core Customers               3837
-At Risk / Lost                1954
-Wholesale - High Value          42
-Wholesale - Extreme              4
 
-Sample of labeled customer-level output:
-
-customer_id   Recency_Days   Frequency   Monetary    cluster
-12347         2              8           5633.32     0
-12348         75             5           2019.40     0
-12349         18             5           4404.54     0
-12350         310            1           334.40      3
-12351         375            1           300.93      3
+<img width="828" height="538" alt="image" src="https://github.com/user-attachments/assets/56a87b49-22a4-4c28-a740-a3150f809384" />
 
 Power BI dashboard:
 
@@ -85,7 +60,7 @@ Power BI dashboard:
 
 The dashboard follows an F-pattern layout: segment KPIs across the top (scanned first), core visuals — including a Recency-vs-Monetary scatter plot colored by segment — in the row below, and Year/Month slicers running down the left side for quick filtering. A detail table at the bottom surfaces individual customer records for anyone who wants to verify the aggregate numbers against real rows.
 
-What's in this repo
+What's in this repository
 File	Description
 RFM_Customer_Segmentation_Report.docx	Full written report — executive summary, findings, recommendations, limitations, and SQL evidence
 
@@ -94,6 +69,10 @@ rfm_queries.sql	All SQL: schema, indexing, and the Recency/Frequency/Monetary fe
 rfm_segmentation_pipeline.py	Full Python pipeline: scaling, elbow method, K-Means, segment naming, and writing results back to MySQL
 
 Power BI dashboard	Interactive segment KPIs, scatter plot and monthly trend visuals
+
+Screenshot of the RFM_Customer_Segmentation Analysis Power BI Dashboard
+
+power point presentation of RFM Customer Segmentation made with gamma
 
 
 Known Limitations
